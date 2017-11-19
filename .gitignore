@@ -1,3 +1,8 @@
 # Vim
-.*.swp
-.*.swo
+*.swp
+*.swo
+
+# Python Django
+*migrations*
+*pycache*
+
