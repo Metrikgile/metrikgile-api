@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'metrikgile.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'metrikgile_db',
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': 'db',
