@@ -1,3 +1,8 @@
 from django.shortcuts import render
+import requests
 
-# Create your views here.
+class GetIssues():
+    url = 'https://api.github.com/repos/Metrikgile/metrikgile-api/issues'
+    response = requests.get(url)
+
+
