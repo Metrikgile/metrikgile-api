@@ -1,2 +1,5 @@
 Django==1.11
-psycopg2
+djangorestframework==3.7.3
+psycopg2==2.7.3.2
+pytz==2017.3
+[33mThe directory '/.cache/pip/http' or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.[0m
