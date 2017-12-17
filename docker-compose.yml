@@ -1,9 +1,10 @@
 version: '3'
+
 services:
     web:
         build: .
         volumes:
-            - .:/metrikgile/
+            - .:/metrikgile
         ports:
             - "8000:8000"
         command: python3 manage.py runserver 0.0.0.0:8000
