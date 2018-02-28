@@ -35,7 +35,8 @@ def test_get_project_return_200(client, register_project_url):
 def test_get_project_return_not_null_content(client, register_project_url):
     """ Test non empty content for a get in project url"""
 
-    response = client.get(register_project_url)
+    data = {'repository_name': 'Metrikgile/metrikgile-api'}
+    response = client.post(register_project_url, data=data)
 
     assert response.json()
 
@@ -43,7 +44,8 @@ def test_get_project_return_not_null_content(client, register_project_url):
 def test_get_repository_on_response(client, register_project_url):
     """ Test repository information returned in the content """
 
-    response = client.get(register_project_url)
+    data = {'repository_name': 'Metrikgile/metrikgile-api'}
+    response = client.post(register_project_url, data=data)
 
     assert response.json()['name'] == 'metrikgile-api'
 
@@ -51,7 +53,8 @@ def test_get_repository_on_response(client, register_project_url):
 def test_new_repository_registration(client, register_project_url):
     """ Test whether the method register a new repository on db """
 
-    response = client.get(register_project_url)
+    data = {'repository_name': 'Metrikgile/metrikgile-api'}
+    response = client.post(register_project_url, data=data)
 
     assert Repository.objects.count() == 1
     assert Repository.objects.first().name == 'metrikgile-api'
