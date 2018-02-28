@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from projects.serializers import RepositorySerializer
+from projects.models import Repository
 
 API_GITHUB_URL = 'https://api.github.com/repos/'
 
@@ -44,3 +45,10 @@ class RegisterRepository(generics.CreateAPIView):
         headers = self.get_success_headers(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class RepositoryDetail(generics.RetrieveAPIView):
+    """ Show detail information about a repository """
+
+    serializer_class = RepositorySerializer
+    queryset = Repository.objects.all()

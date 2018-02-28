@@ -1,5 +1,7 @@
 from django.urls import reverse
+
 import pytest
+from model_mommy import mommy
 
 from projects.models import Repository
 
@@ -9,6 +11,12 @@ pytestmark = pytest.mark.django_db
 @pytest.fixture
 def register_project_url():
     url = reverse('projects:repo_registration')
+
+    return url
+
+
+def get_repository_url(pk):
+    url = reverse('projects:repo_detail', kwargs={'pk': pk})
 
     return url
 
@@ -67,3 +75,36 @@ def test_400_for_not_found_repository_name(client, register_project_url):
     response = client.post(register_project_url, data=data)
 
     assert response.status_code == 400
+
+
+def test_404_for_get_invalid_repository(client):
+    """ Test return 404 for a get of an invalid repository on detail url """
+    url = get_repository_url(0)
+    response = client.get(url)
+
+    assert response.status_code == 404
+
+
+def test_200_for_get_repository(client):
+    """ Test 200 for a get on repository detail url """
+
+    repository = mommy.make('Repository')
+
+    url = get_repository_url(repository.id)
+
+    response = client.get(url)
+
+    assert response.status_code == 200
+
+
+def test_information_get_repository_detail(client):
+    """ Test basic information returned based on id of a repository """
+
+    repository = mommy.make('Repository')
+
+    url = get_repository_url(repository.id)
+
+    response = client.get(url)
+
+    assert response.json()['id'] == repository.id
+    assert response.json()['name'] == repository.name
