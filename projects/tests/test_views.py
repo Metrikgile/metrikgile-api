@@ -59,3 +59,11 @@ def test_new_repository_registration(client, register_project_url):
     assert Repository.objects.count() == 1
     assert Repository.objects.first().name == 'metrikgile-api'
 
+
+def test_400_for_not_found_repository_name(client, register_project_url):
+    """ Test 400 return for a post with an invalid repository """
+
+    data = {'repository_name': 'iuifhgh'}
+    response = client.post(register_project_url, data=data)
+
+    assert response.status_code == 400

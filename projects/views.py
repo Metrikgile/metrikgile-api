@@ -1,5 +1,3 @@
-from django.http import HttpResponse, HttpResponseNotFound
-
 import requests
 from rest_framework import generics
 from rest_framework import status
